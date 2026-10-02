@@ -1,0 +1,6 @@
+{
+  "name": "Training Center Surabaya (TCS)",
+  "description": "Portal manajemen training dan dashboard analitik interaktif Training Center Surabaya dengan visualisasi Chart.js, statistik jenis soal, dan database Supabase PostgreSQL.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
