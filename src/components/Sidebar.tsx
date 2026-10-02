@@ -73,7 +73,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
   ];
 
   const sidebarContent = (
-    <div className="flex flex-col h-full bg-slate-900 text-slate-200">
+    <div 
+      style={{ backgroundColor: '#0f172a', color: '#e2e8f0' }}
+      className="flex flex-col h-full bg-slate-900 text-slate-200"
+    >
       {/* Iconic Indomaret Tri-color Header Accent (Biru - Merah - Kuning) */}
       <div className="h-1.5 w-full flex shrink-0">
         <div className="w-1/3 bg-[#0057B8]"></div>
@@ -82,7 +85,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Brand Header */}
-      <div className="p-4 border-b border-slate-800 flex items-center justify-between">
+      <div className="p-4 border-b border-slate-800 flex items-center justify-between" style={{ borderBottomColor: '#1e293b' }}>
         <div className="flex items-center gap-3">
           {/* Official Indomaret Logo from user URL */}
           <div className="bg-white px-2 py-1.5 rounded-xl shadow-xs border border-white/20 flex items-center justify-center shrink-0">
@@ -98,10 +101,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
             />
           </div>
           <div>
-            <h1 className="font-bold text-white text-sm tracking-tight leading-tight">
+            <h1 className="font-bold text-white text-sm tracking-tight leading-tight" style={{ color: '#ffffff' }}>
               Training Center
             </h1>
-            <p className="text-[11px] text-amber-400 font-semibold">Surabaya · v1.8</p>
+            <p className="text-[11px] text-amber-400 font-semibold" style={{ color: '#fbbf24' }}>Surabaya · v1.8</p>
           </div>
         </div>
 
@@ -116,7 +119,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Navigation Links */}
       <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
-        <div className="px-3 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+        <div className="px-3 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider" style={{ color: '#94a3b8' }}>
           Menu Utama & Divisi
         </div>
 
@@ -131,6 +134,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 onSelectView(item.id);
                 onCloseMobile();
               }}
+              style={isActive ? { backgroundColor: '#0057b8', color: '#ffffff' } : { color: '#cbd5e1' }}
               className={`w-full text-left px-3.5 py-2.5 rounded-xl transition-all duration-150 flex items-center justify-between group ${
                 isActive
                   ? 'bg-blue-600 text-white shadow-sm font-semibold'
@@ -152,6 +156,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </div>
 
               <span
+                style={isActive ? { backgroundColor: 'rgba(255,255,255,0.2)', color: '#ffffff' } : { backgroundColor: '#1e293b', color: '#94a3b8' }}
                 className={`text-[11px] font-mono px-2 py-0.5 rounded-full shrink-0 tabular-nums ${
                   isActive
                     ? 'bg-white/20 text-white'
@@ -166,26 +171,36 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </nav>
 
       {/* Database Connection Footer */}
-      <div className="p-4 border-t border-slate-800 bg-slate-950/40 text-xs space-y-2.5">
+      <div 
+        style={{ backgroundColor: '#020617', borderTopColor: '#1e293b' }}
+        className="p-4 border-t border-slate-800 bg-slate-950/40 text-xs space-y-2.5"
+      >
         {/* Supabase Database Active Button */}
         <button
           onClick={onOpenSupabaseModal}
+          style={{ backgroundColor: '#022c22', backgroundImage: 'linear-gradient(135deg, #022c22 0%, #0f172a 100%)', borderColor: '#059669' }}
           className="w-full flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-emerald-950/90 to-slate-900 border border-emerald-500/50 hover:border-emerald-400 text-left transition-all group shadow-sm"
         >
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+            <div 
+              style={{ backgroundColor: 'rgba(52, 211, 153, 0.2)', color: '#34d399' }}
+              className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold"
+            >
               ⚡
             </div>
             <div>
-              <span className="font-bold text-emerald-400 text-xs block group-hover:text-emerald-300">
+              <span className="font-bold text-emerald-400 text-xs block group-hover:text-emerald-300" style={{ color: '#34d399' }}>
                 Database Supabase
               </span>
-              <span className="text-[10px] text-slate-300 block">
+              <span className="text-[10px] text-slate-300 block" style={{ color: '#cbd5e1' }}>
                 Terkoneksi Permanen
               </span>
             </div>
           </div>
-          <span className="text-[10px] font-bold text-emerald-300 bg-emerald-900/80 px-2 py-0.5 rounded-md border border-emerald-700">
+          <span 
+            style={{ backgroundColor: '#064e3b', color: '#6ee7b7', borderColor: '#047857' }}
+            className="text-[10px] font-bold text-emerald-300 bg-emerald-900/80 px-2 py-0.5 rounded-md border border-emerald-700"
+          >
             Aktif
           </span>
         </button>
@@ -193,7 +208,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="flex items-center justify-between pt-1">
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-semibold text-slate-300 text-[11px]">
+            <span className="font-semibold text-slate-300 text-[11px]" style={{ color: '#cbd5e1' }}>
               PostgreSQL · Supabase
             </span>
           </div>
@@ -207,17 +222,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </button>
         </div>
 
-        <p className="text-[11px] font-mono text-slate-400 truncate">
+        <p className="text-[11px] font-mono text-slate-400 truncate" style={{ color: '#94a3b8' }}>
           Tabel: public.training_soal
         </p>
 
-        <div className="text-[10px] text-slate-400 flex items-center justify-between">
+        <div className="text-[10px] text-slate-400 flex items-center justify-between" style={{ color: '#94a3b8' }}>
           <span>Status Sinkron:</span>
-          <span className="text-slate-300 font-mono truncate max-w-[120px]">{lastSync}</span>
+          <span className="text-slate-300 font-mono truncate max-w-[120px]" style={{ color: '#e2e8f0' }}>{lastSync}</span>
         </div>
 
         <button
           onClick={onOpenSupabaseModal}
+          style={{ backgroundColor: '#1e293b', color: '#e2e8f0', borderColor: '#334155' }}
           className="w-full mt-1 inline-flex items-center justify-center gap-1.5 py-1.5 px-2 bg-slate-800/80 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg text-[11px] font-medium transition-colors border border-slate-700/60"
         >
           <span>Status & Info Database</span>

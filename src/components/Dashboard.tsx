@@ -60,7 +60,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
   return (
     <div className="space-y-6">
       {/* Hero Welcome Banner with Indomaret Tri-color Accent */}
-      <div className="relative rounded-3xl bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-950 text-white shadow-sm overflow-hidden border border-blue-800/60">
+      <div 
+        style={{ backgroundColor: '#1e3a8a', backgroundImage: 'linear-gradient(135deg, #1e3a8a 0%, #172554 100%)', color: '#ffffff' }}
+        className="relative rounded-3xl bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-950 text-white shadow-sm overflow-hidden border border-blue-800/60"
+      >
         {/* Tricolor Stripe on Hero */}
         <div className="h-1.5 w-full flex">
           <div className="w-1/3 bg-[#0057B8]"></div>
@@ -74,23 +77,25 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <span>Training Center Surabaya v1.8 · Edisi Indomaret</span>
           </div>
 
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-white mb-2">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-white mb-2" style={{ color: '#ffffff' }}>
             Dashboard Link Penting Tc Surabaya
           </h2>
 
-          <p className="text-sm md:text-base text-blue-100/90 leading-relaxed max-w-2xl mb-6">
+          <p className="text-sm md:text-base text-blue-100/90 leading-relaxed max-w-2xl mb-6" style={{ color: '#dbeafe' }}>
             Pusat kumpulan link training dan monitoring operasional Tc Surabaya.
           </p>
 
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={onOpenAddModal}
+              style={{ backgroundColor: '#E31837', color: '#ffffff' }}
               className="px-4 py-2 text-xs font-bold text-white bg-[#E31837] hover:bg-[#c9122f] active:bg-[#a80c25] rounded-xl transition-all shadow-sm flex items-center gap-1.5"
             >
               <span>+ Tambah Soal Baru</span>
             </button>
             <button
               onClick={onViewAllData}
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.15)', color: '#ffffff' }}
               className="px-4 py-2 text-xs font-semibold text-white bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-xl transition-colors border border-white/20 flex items-center gap-1.5"
             >
               <span>Jelajahi Semua Modul</span>
@@ -99,6 +104,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             {onOpenSupabaseModal && (
               <button
                 onClick={onOpenSupabaseModal}
+                style={{ backgroundColor: '#34d399', color: '#022c22' }}
                 className="px-4 py-2 text-xs font-bold text-emerald-950 bg-emerald-400 hover:bg-emerald-300 rounded-xl transition-all shadow-sm flex items-center gap-1.5"
               >
                 <span className="w-2 h-2 rounded-full bg-emerald-900 animate-pulse"></span>
@@ -114,28 +120,38 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
       {/* Supabase Notice Banner */}
       {onOpenSupabaseModal && (
-        <div className="rounded-2xl bg-gradient-to-r from-emerald-950 via-slate-900 to-blue-950 p-4 border border-emerald-500/40 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+        <div 
+          style={{ backgroundColor: '#022c22', backgroundImage: 'linear-gradient(135deg, #022c22 0%, #0f172a 100%)', color: '#ffffff' }}
+          className="rounded-2xl bg-gradient-to-r from-emerald-950 via-slate-900 to-blue-950 p-4 border border-emerald-500/40 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs"
+        >
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-base shrink-0 border border-emerald-400/30">
+            <div 
+              style={{ backgroundColor: 'rgba(52, 211, 153, 0.2)', color: '#34d399' }}
+              className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-base shrink-0 border border-emerald-400/30"
+            >
               ⚡
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-bold text-sm text-emerald-300">
+                <span className="font-bold text-sm text-emerald-300" style={{ color: '#6ee7b7' }}>
                   Database PostgreSQL Supabase Terhubung Permanen
                 </span>
-                <span className="text-[10px] font-bold text-emerald-300 bg-emerald-900/90 px-2 py-0.5 rounded-full border border-emerald-600">
+                <span 
+                  style={{ backgroundColor: '#064e3b', color: '#6ee7b7', borderColor: '#059669' }}
+                  className="text-[10px] font-bold text-emerald-300 bg-emerald-900/90 px-2 py-0.5 rounded-full border border-emerald-600"
+                >
                   Aktif & Real-time
                 </span>
               </div>
-              <p className="text-xs text-slate-300 mt-0.5">
-                Portal TCS terhubung langsung ke tabel <code className="text-emerald-400 font-mono">training_soal</code> di <code className="text-emerald-300 font-mono">dcnofnehuqwgtvwrnobc.supabase.co</code>.
+              <p className="text-xs text-slate-300 mt-0.5" style={{ color: '#cbd5e1' }}>
+                Portal TCS terhubung langsung ke tabel <code style={{ color: '#34d399' }} className="text-emerald-400 font-mono">training_soal</code> di <code style={{ color: '#6ee7b7' }} className="text-emerald-300 font-mono">dcnofnehuqwgtvwrnobc.supabase.co</code>.
               </p>
             </div>
           </div>
 
           <button
             onClick={onOpenSupabaseModal}
+            style={{ backgroundColor: '#059669', color: '#ffffff' }}
             className="px-4 py-2 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 rounded-xl transition-colors shrink-0 shadow-sm"
           >
             Status & Info Database
