@@ -27,9 +27,9 @@ export const Header: React.FC<HeaderProps> = ({
   const getBreadcrumbTitle = () => {
     switch (currentView) {
       case 'dashboard':
-        return 'Dashboard & Statistik';
+        return 'Dashboard';
       case 'ALL':
-        return 'Semua Bank Soal';
+        return 'Semua kumpulan Link';
       case 'TCDEV2':
         return 'Divisi TCDEV2';
       case 'SS':

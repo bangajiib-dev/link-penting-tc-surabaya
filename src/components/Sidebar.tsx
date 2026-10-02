@@ -62,8 +62,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   }, [data]);
 
   const navItems = [
-    { id: 'dashboard', label: 'Dashboard Analitik', icon: LayoutDashboard, count: counts.dashboard },
-    { id: 'ALL', label: 'Semua Bank Soal', icon: Database, count: counts.ALL },
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, count: counts.dashboard },
+    { id: 'ALL', label: 'Semua kumpulan Link', icon: Database, count: counts.ALL },
     { id: 'TCDEV2', label: 'TCDEV2', subtitle: 'Development', icon: GraduationCap, count: counts.TCDEV2 },
     { id: 'SS', label: 'SS (Special Store)', subtitle: 'Point Coffee, YCCG', icon: Store, count: counts.SS },
     { id: 'FBI', label: 'FBI (Food & Beverage)', subtitle: 'Say Bread & Burger', icon: UtensilsCrossed, count: counts.FBI },

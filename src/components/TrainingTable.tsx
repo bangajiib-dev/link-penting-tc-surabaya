@@ -161,7 +161,7 @@ export const TrainingTable: React.FC<TrainingTableProps> = ({
           <div>
             <h3 className="font-bold text-slate-900 text-lg tracking-tight flex items-center gap-2">
               <TableIcon className="w-5 h-5 text-blue-600" />
-              <span>Katalog Data Training</span>
+              <span>Katalog Data LInk Penting Tc Surabaya</span>
               <span className="font-mono text-xs font-semibold text-slate-700 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md tabular-nums">
                 {filteredItems.length} Modul
               </span>

@@ -4,8 +4,8 @@ Portal manajemen bank soal, monitoring operasional, dan dashboard analitik inter
 
 ## Fitur Utama
 
-- **Dashboard Analitik**: Statistik interaktif jenis soal (Pie & Doughnut Chart) dan distribusi per divisi (Bar Chart).
-- **Katalog Bank Soal**: Manajemen modul training, link pengerjaan, link tarik data, dan QR code pengerjaan.
+- **Dashboard**: Statistik interaktif jenis soal (Pie & Doughnut Chart) dan distribusi per divisi (Bar Chart).
+- **Semua Kumpulan Link**: Manajemen modul training, link pengerjaan, link tarik data, dan QR code pengerjaan.
 - **Database Supabase**: Skema PostgreSQL dengan tabel `training_soal`, Row Level Security (RLS), dan query performa tinggi.
 - **Kumpulan Link Penting**: Sistem manajemen link modul training, link pengerjaan, link tarik data, dan monitoring TC Surabaya.
 

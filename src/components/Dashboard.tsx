@@ -75,11 +75,11 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </div>
 
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-white mb-2">
-            Dashboard Analitik & Bank Soal TCS
+            Dashboard Link Penting Tc Surabaya
           </h2>
 
           <p className="text-sm md:text-base text-blue-100/90 leading-relaxed max-w-2xl mb-6">
-            Pusat visualisasi interaktif jenis soal, manajemen bank soal, monitoring operasional, dan integrasi database Supabase PostgreSQL.
+            Pusat kumpulan link training dan monitoring operasional Tc Surabaya.
           </p>
 
           <div className="flex flex-wrap items-center gap-3">
