@@ -176,10 +176,10 @@ export const TrainingTable: React.FC<TrainingTableProps> = ({
               <button
                 onClick={onOpenSupabaseModal}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl transition-colors shadow-2xs"
-                title="Buka script SQL Supabase"
+                title="Status Database Supabase"
               >
-                <span>⚡</span>
-                <span className="hidden sm:inline">SQL Supabase</span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span className="hidden sm:inline">Database Supabase</span>
               </button>
             )}
             <button

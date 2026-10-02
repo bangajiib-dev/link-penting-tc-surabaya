@@ -39,7 +39,7 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
   onShowToast,
   onRefreshData
 }) => {
-  const [activeTab, setActiveTab] = useState<'sql' | 'config' | 'guide'>('sql');
+  const [activeTab, setActiveTab] = useState<'config' | 'sql' | 'guide'>('config');
   const [copied, setCopied] = useState(false);
   const [supabaseUrl, setSupabaseUrl] = useState(() => getSupabaseConfig().url);
   const [supabaseAnonKey, setSupabaseAnonKey] = useState(() => getSupabaseConfig().anonKey);
@@ -119,14 +119,14 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-bold text-slate-900 text-base md:text-lg leading-tight">
-                  Supabase Database & SQL Editor
+                  Status Database Supabase
                 </h3>
                 <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                  PostgreSQL
+                  Terkoneksi Aktif
                 </span>
               </div>
               <p className="text-xs text-slate-500">
-                Script inisialisasi tabel, RLS, indeks, dan {data.length} modul training siap eksekusi
+                Database PostgreSQL Supabase terhubung permanen pada tabel <code className="text-emerald-600 font-mono font-semibold">training_soal</code>
               </p>
             </div>
           </div>
@@ -142,18 +142,6 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
         {/* Navigation Tabs */}
         <div className="px-6 pt-3 border-b border-slate-100 bg-slate-50/30 flex items-center gap-2">
           <button
-            onClick={() => setActiveTab('sql')}
-            className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold rounded-t-xl border-b-2 transition-all ${
-              activeTab === 'sql'
-                ? 'border-blue-600 text-blue-700 bg-white shadow-2xs'
-                : 'border-transparent text-slate-500 hover:text-slate-900'
-            }`}
-          >
-            <Terminal className="w-4 h-4" />
-            <span>Script SQL Editor</span>
-          </button>
-
-          <button
             onClick={() => setActiveTab('config')}
             className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold rounded-t-xl border-b-2 transition-all ${
               activeTab === 'config'
@@ -162,7 +150,19 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
             }`}
           >
             <Settings2 className="w-4 h-4" />
-            <span>Koneksi Supabase Langsung</span>
+            <span>Koneksi & Status Database</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('sql')}
+            className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold rounded-t-xl border-b-2 transition-all ${
+              activeTab === 'sql'
+                ? 'border-blue-600 text-blue-700 bg-white shadow-2xs'
+                : 'border-transparent text-slate-500 hover:text-slate-900'
+            }`}
+          >
+            <Terminal className="w-4 h-4" />
+            <span>Script SQL (Cadangan)</span>
           </button>
 
           <button
@@ -174,7 +174,7 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
             }`}
           >
             <BookOpen className="w-4 h-4" />
-            <span>Panduan Langkah Demi Langkah</span>
+            <span>Panduan Supabase</span>
           </button>
         </div>
 
@@ -237,33 +237,39 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
           </div>
         )}
 
-        {/* Tab 2: Connection Settings */}
+        {/* Tab 1: Connection Settings */}
         {activeTab === 'config' && (
           <div className="p-6 overflow-y-auto space-y-5 text-xs">
-            <div className="bg-blue-50/70 border border-blue-200/80 rounded-2xl p-4 text-slate-700">
-              <h4 className="font-bold text-blue-900 text-sm mb-1 flex items-center gap-2">
-                <Database className="w-4 h-4 text-blue-600" />
-                <span>Sambungkan Aplikasi Langsung ke Database Supabase</span>
-              </h4>
-              <p className="leading-relaxed">
-                Anda dapat menghubungkan portal TCS ini langsung dengan database PostgreSQL di Supabase. Masukkan URL Project dan Anon Key yang terdapat pada dashboard Supabase (menu <strong>Project Settings → API</strong>).
+            <div className="bg-emerald-50/80 border border-emerald-200/90 rounded-2xl p-4 text-slate-700 shadow-2xs">
+              <div className="flex items-center justify-between gap-3 mb-1.5">
+                <h4 className="font-bold text-emerald-900 text-sm flex items-center gap-2">
+                  <Database className="w-4 h-4 text-emerald-600" />
+                  <span>Koneksi Database Supabase Permanen</span>
+                </h4>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white shadow-2xs">
+                  <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                  Terhubung Aktif
+                </span>
+              </div>
+              <p className="leading-relaxed text-slate-600">
+                Aplikasi ini telah dikonfigurasi secara permanen untuk terhubung langsung ke database PostgreSQL Supabase (<code className="text-emerald-800 font-mono font-semibold">dcnofnehuqwgtvwrnobc.supabase.co</code>) pada tabel <code className="text-emerald-800 font-mono font-semibold">training_soal</code>. Semua operasi baca, tambah, edit, dan hapus soal langsung tersinkronisasi otomatis.
               </p>
             </div>
 
             <div className="space-y-4 max-w-2xl">
               <div>
                 <label className="block font-semibold text-slate-800 mb-1">
-                  Project URL Supabase
+                  Project URL Supabase (Permanen)
                 </label>
                 <input
                   type="text"
                   value={supabaseUrl}
                   onChange={(e) => setSupabaseUrl(e.target.value)}
-                  placeholder="https://your-project-ref.supabase.co"
+                  placeholder="https://dcnofnehuqwgtvwrnobc.supabase.co"
                   className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono transition-colors text-xs"
                 />
                 <span className="text-[11px] text-slate-400 mt-1 block">
-                  Dapat ditemukan di Supabase → Settings → API → Project URL
+                  Project Ref: <code className="font-mono text-slate-600">dcnofnehuqwgtvwrnobc</code>
                 </span>
               </div>
 
@@ -279,7 +285,7 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
                   className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono transition-colors text-xs"
                 />
                 <span className="text-[11px] text-slate-400 mt-1 block">
-                  Dapat ditemukan di Supabase → Settings → API → Project API keys (anon public)
+                  Kunci akses publik permanen untuk tabel <code className="font-mono text-slate-600">training_soal</code>
                 </span>
               </div>
 
@@ -307,21 +313,11 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({
                   type="button"
                   onClick={handleSaveConnection}
                   disabled={isTesting}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-xl transition-colors shadow-sm disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 rounded-xl transition-colors shadow-sm disabled:opacity-50"
                 >
                   <RefreshCw className={`w-4 h-4 ${isTesting ? 'animate-spin' : ''}`} />
-                  <span>{isTesting ? 'Menguji Koneksi...' : 'Simpan & Uji Koneksi'}</span>
+                  <span>{isTesting ? 'Menguji Koneksi...' : 'Uji Status Koneksi'}</span>
                 </button>
-
-                {getSupabaseConfig().url && (
-                  <button
-                    type="button"
-                    onClick={handleDisconnect}
-                    className="px-4 py-2.5 text-xs font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-xl transition-colors border border-rose-200"
-                  >
-                    Putuskan Koneksi Supabase
-                  </button>
-                )}
               </div>
             </div>
           </div>

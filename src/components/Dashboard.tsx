@@ -99,9 +99,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
             {onOpenSupabaseModal && (
               <button
                 onClick={onOpenSupabaseModal}
-                className="px-4 py-2 text-xs font-bold text-slate-900 bg-[#FFD200] hover:bg-[#e6bc00] rounded-xl transition-all shadow-sm flex items-center gap-1.5"
+                className="px-4 py-2 text-xs font-bold text-emerald-950 bg-emerald-400 hover:bg-emerald-300 rounded-xl transition-all shadow-sm flex items-center gap-1.5"
               >
-                <span>⚡ Script SQL Supabase</span>
+                <span className="w-2 h-2 rounded-full bg-emerald-900 animate-pulse"></span>
+                <span>Database Supabase</span>
               </button>
             )}
           </div>
@@ -113,7 +114,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
       {/* Supabase Notice Banner */}
       {onOpenSupabaseModal && (
-        <div className="rounded-2xl bg-gradient-to-r from-emerald-950 via-slate-900 to-blue-950 p-4 border border-emerald-500/30 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+        <div className="rounded-2xl bg-gradient-to-r from-emerald-950 via-slate-900 to-blue-950 p-4 border border-emerald-500/40 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-base shrink-0 border border-emerald-400/30">
               ⚡
@@ -121,14 +122,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-bold text-sm text-emerald-300">
-                  Database PostgreSQL Supabase Siap Digunakan
+                  Database PostgreSQL Supabase Terhubung Permanen
                 </span>
-                <span className="text-[10px] font-bold text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded-full border border-emerald-700">
-                  {isSupabaseActive ? 'Aktif' : 'Tersedia'}
+                <span className="text-[10px] font-bold text-emerald-300 bg-emerald-900/90 px-2 py-0.5 rounded-full border border-emerald-600">
+                  Aktif & Real-time
                 </span>
               </div>
-              <p className="text-xs text-slate-300">
-                Gunakan script SQL yang telah disiapkan untuk membuat tabel <code className="text-emerald-400 font-mono">training_soal</code> dan mengimpor 55 data modul training di Supabase SQL Editor.
+              <p className="text-xs text-slate-300 mt-0.5">
+                Portal TCS terhubung langsung ke tabel <code className="text-emerald-400 font-mono">training_soal</code> di <code className="text-emerald-300 font-mono">dcnofnehuqwgtvwrnobc.supabase.co</code>.
               </p>
             </div>
           </div>
@@ -137,7 +138,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             onClick={onOpenSupabaseModal}
             className="px-4 py-2 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 rounded-xl transition-colors shrink-0 shadow-sm"
           >
-            Buka SQL Editor Supabase
+            Status & Info Database
           </button>
         </div>
       )}

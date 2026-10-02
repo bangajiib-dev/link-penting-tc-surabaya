@@ -167,10 +167,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Database Connection Footer */}
       <div className="p-4 border-t border-slate-800 bg-slate-950/40 text-xs space-y-2.5">
-        {/* Supabase SQL Editor Quick Button */}
+        {/* Supabase Database Active Button */}
         <button
           onClick={onOpenSupabaseModal}
-          className="w-full flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-emerald-950/80 to-slate-900 border border-emerald-500/40 hover:border-emerald-400 text-left transition-all group shadow-sm"
+          className="w-full flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-emerald-950/90 to-slate-900 border border-emerald-500/50 hover:border-emerald-400 text-left transition-all group shadow-sm"
         >
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
@@ -178,23 +178,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </div>
             <div>
               <span className="font-bold text-emerald-400 text-xs block group-hover:text-emerald-300">
-                SQL Editor Supabase
+                Database Supabase
               </span>
-              <span className="text-[10px] text-slate-400 block">
-                {isSupabaseActive ? 'Terkoneksi Supabase' : 'Salin Script SQL'}
+              <span className="text-[10px] text-slate-300 block">
+                Terkoneksi Permanen
               </span>
             </div>
           </div>
-          <span className="text-[10px] font-bold text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded-md border border-emerald-800">
-            Open
+          <span className="text-[10px] font-bold text-emerald-300 bg-emerald-900/80 px-2 py-0.5 rounded-md border border-emerald-700">
+            Aktif
           </span>
         </button>
 
         <div className="flex items-center justify-between pt-1">
           <div className="flex items-center gap-1.5">
-            <span className={`w-2 h-2 rounded-full ${isSupabaseActive ? 'bg-emerald-400' : 'bg-amber-400'} animate-pulse`} />
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="font-semibold text-slate-300 text-[11px]">
-              Database: Supabase (PostgreSQL)
+              PostgreSQL · Supabase
             </span>
           </div>
           <button
@@ -220,7 +220,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           onClick={onOpenSupabaseModal}
           className="w-full mt-1 inline-flex items-center justify-center gap-1.5 py-1.5 px-2 bg-slate-800/80 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg text-[11px] font-medium transition-colors border border-slate-700/60"
         >
-          <span>Buka SQL Editor & Setup</span>
+          <span>Status & Info Database</span>
           <ExternalLink className="w-3 h-3 text-slate-400" />
         </button>
       </div>

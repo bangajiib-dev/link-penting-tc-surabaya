@@ -7,18 +7,21 @@ import { INITIAL_TRAINING_DATA } from '../data/initialData';
 const SUPABASE_URL_KEY = 'TCS_SUPABASE_URL';
 const SUPABASE_KEY_KEY = 'TCS_SUPABASE_ANON_KEY';
 
+export const PERMANENT_SUPABASE_URL = 'https://dcnofnehuqwgtvwrnobc.supabase.co';
+export const PERMANENT_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRjbm9mbmVodXF3Z3R2d3Jub2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4ODY0NTgsImV4cCI6MjEwNjQ2MjQ1OH0.4VpMHY4h_D1ctJ78HxiU0gU0YsmnU1Hz3hXdcfZNnSI';
+
 /**
- * Get active Supabase configuration (either from env or localStorage)
+ * Get active Supabase configuration (permanent default, with env/localStorage override support)
  */
 export function getSupabaseConfig(): { url: string; anonKey: string } {
   const envUrl = (import.meta as any).env?.VITE_SUPABASE_URL || '';
   const envKey = (import.meta as any).env?.VITE_SUPABASE_ANON_KEY || '';
-  const localUrl = localStorage.getItem(SUPABASE_URL_KEY) || '';
-  const localKey = localStorage.getItem(SUPABASE_KEY_KEY) || '';
+  const localUrl = typeof localStorage !== 'undefined' ? localStorage.getItem(SUPABASE_URL_KEY) || '' : '';
+  const localKey = typeof localStorage !== 'undefined' ? localStorage.getItem(SUPABASE_KEY_KEY) || '' : '';
 
   return {
-    url: localUrl || envUrl,
-    anonKey: localKey || envKey
+    url: envUrl || localUrl || PERMANENT_SUPABASE_URL,
+    anonKey: envKey || localKey || PERMANENT_SUPABASE_ANON_KEY
   };
 }
 

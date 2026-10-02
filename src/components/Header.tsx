@@ -80,19 +80,15 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Right: Actions */}
         <div className="flex items-center gap-2 md:gap-3">
-          {/* Supabase SQL Button */}
+          {/* Supabase Database Button */}
           <button
             onClick={onOpenSupabaseModal}
-            className={`inline-flex items-center gap-1.5 py-1.5 px-3 text-xs font-bold rounded-xl transition-all shadow-2xs border ${
-              isSupabaseActive
-                ? 'bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100'
-                : 'bg-emerald-600 text-white hover:bg-emerald-700 border-emerald-700'
-            }`}
-            title="Buka Script SQL Editor untuk Supabase"
+            className="inline-flex items-center gap-1.5 py-1.5 px-3 text-xs font-bold rounded-xl transition-all shadow-2xs border bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100"
+            title="Status Database Supabase (Terkoneksi Permanen)"
           >
-            <span className="text-xs">⚡</span>
-            <span className="hidden sm:inline">SQL Editor Supabase</span>
-            <span className="sm:hidden">SQL</span>
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className="hidden sm:inline">Database Supabase</span>
+            <span className="sm:hidden">Supabase</span>
           </button>
 
           {/* Sync Button */}
