@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { TrainingItem } from '../types/training';
 import { SUB_DIVISI_MAP, JENIS_SOAL_OPTIONS } from '../data/initialData';
-import { X, Save, AlertCircle, Sparkles } from 'lucide-react';
+import { getGeneratedQrUrl } from '../services/qrService';
+import { X, Save, AlertCircle, Sparkles, QrCode, CheckCircle2 } from 'lucide-react';
 
 interface TrainingModalProps {
   isOpen: boolean;
@@ -66,6 +67,10 @@ export const TrainingModal: React.FC<TrainingModalProps> = ({
     }));
   };
 
+  const cleanLink = formData.link_pengerjaan?.trim() || '';
+  const oldLink = itemToEdit?.link_pengerjaan?.trim() || '';
+  const isLinkChanged = Boolean(itemToEdit && cleanLink !== oldLink);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.divisi) {
@@ -83,6 +88,16 @@ export const TrainingModal: React.FC<TrainingModalProps> = ({
 
     const now = new Date().toISOString().replace('T', ' ').substring(0, 19);
 
+    // Otomatis regenerate link_qr setiap kali link pengerjaan diubah atau ditambahkan baru
+    let updatedLinkQr = itemToEdit?.link_qr || '';
+    if (cleanLink) {
+      if (!itemToEdit || cleanLink !== oldLink || !updatedLinkQr || updatedLinkQr.includes('drive.google.com')) {
+        updatedLinkQr = getGeneratedQrUrl(cleanLink, 500);
+      }
+    } else {
+      updatedLinkQr = '';
+    }
+
     const completeItem: TrainingItem = {
       id: itemToEdit?.id || String(Date.now()),
       divisi: formData.divisi,
@@ -90,13 +105,13 @@ export const TrainingModal: React.FC<TrainingModalProps> = ({
       nama_soal: formData.nama_soal.trim(),
       training_hari_ke: Number(formData.training_hari_ke) || 0,
       jenis_soal: formData.jenis_soal || 'Pre Test / Post Test',
-      link_pengerjaan: formData.link_pengerjaan?.trim() || '',
+      link_pengerjaan: cleanLink,
       link_tarik_data: formData.link_tarik_data?.trim() || '-',
       keterangan: formData.keterangan?.trim() || '-',
       status: formData.status || 'Aktif',
       created_date: itemToEdit?.created_date || now,
       updated_date: now,
-      link_qr: itemToEdit?.link_qr || ''
+      link_qr: updatedLinkQr
     };
 
     onSave(completeItem);
@@ -249,9 +264,17 @@ export const TrainingModal: React.FC<TrainingModalProps> = ({
 
             {/* Link Pengerjaan */}
             <div className="md:col-span-2">
-              <label className="block font-semibold text-slate-700 mb-1">
-                Link Pengerjaan (Google Form / Web App / Bitly / dsb)
-              </label>
+              <div className="flex items-center justify-between mb-1">
+                <label className="block font-semibold text-slate-700">
+                  Link Pengerjaan (Google Form / Web App / Bitly / dsb)
+                </label>
+                {cleanLink && (
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    <Sparkles className="w-3 h-3 text-emerald-600" />
+                    <span>Barcode Otomatis Diperbarui</span>
+                  </span>
+                )}
+              </div>
               <input
                 type="text"
                 value={formData.link_pengerjaan}
@@ -259,6 +282,46 @@ export const TrainingModal: React.FC<TrainingModalProps> = ({
                 placeholder="https://script.google.com/... atau https://forms.gle/..."
                 className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors font-mono"
               />
+
+              {/* Barcode Regeneration Live Notice & Preview */}
+              {cleanLink ? (
+                <div className={`mt-2 p-2.5 rounded-xl border flex items-center gap-3 transition-colors ${
+                  isLinkChanged
+                    ? 'bg-emerald-50/90 border-emerald-300 text-emerald-800'
+                    : 'bg-slate-50 border-slate-200 text-slate-700'
+                }`}>
+                  <div className="p-1 bg-white rounded-lg border border-slate-200 shrink-0 shadow-2xs">
+                    <img
+                      src={getGeneratedQrUrl(cleanLink, 120)}
+                      alt="Preview Barcode"
+                      className="w-10 h-10 object-contain rounded"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="text-[11px] min-w-0">
+                    <div className="flex items-center gap-1.5 font-bold">
+                      {isLinkChanged ? (
+                        <>
+                          <Sparkles className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                          <span className="text-emerald-800">Link Berubah: Barcode Otomatis Dibuat Ulang</span>
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                          <span className="text-slate-800">Barcode QR Aktif Sesuai Link Ini</span>
+                        </>
+                      )}
+                    </div>
+                    <p className="text-[10px] text-slate-500 truncate mt-0.5">
+                      Target scan: <span className="font-mono text-slate-700">{cleanLink}</span>
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <span className="text-[10px] text-slate-400 mt-1 block">
+                  💡 Saat link pengerjaan diisi atau diedit, barcode QR akan dibuat ulang secara otomatis.
+                </span>
+              )}
             </div>
 
             {/* Link Tarik Data */}

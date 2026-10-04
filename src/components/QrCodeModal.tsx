@@ -1,9 +1,10 @@
 /* © 2026 Bang Ajiib. All rights reserved. */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TrainingItem } from '../types/training';
-import { formatUrl, getDirectDriveUrl, getQuickChartQrUrl } from '../services/sheetsService';
-import { X, ExternalLink, Copy, Check, Download, QrCode, Smartphone } from 'lucide-react';
+import { formatUrl } from '../services/sheetsService';
+import { generateQrDataUrl, getItemQrCodeUrl } from '../services/qrService';
+import { X, ExternalLink, Copy, Check, Download, QrCode, Smartphone, Sparkles } from 'lucide-react';
 
 interface QrCodeModalProps {
   item: TrainingItem | null;
@@ -17,13 +18,28 @@ export const QrCodeModal: React.FC<QrCodeModalProps> = ({
   onShowToast
 }) => {
   const [copied, setCopied] = useState(false);
+  const [dataUrl, setDataUrl] = useState<string>('');
+
+  const directPengerjaanUrl = item ? formatUrl(item.link_pengerjaan) : '#';
+
+  useEffect(() => {
+    let isMounted = true;
+    if (directPengerjaanUrl !== '#') {
+      generateQrDataUrl(directPengerjaanUrl, 600).then(url => {
+        if (isMounted) setDataUrl(url);
+      });
+    } else {
+      setDataUrl('');
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [directPengerjaanUrl]);
 
   if (!item) return null;
 
-  const directPengerjaanUrl = formatUrl(item.link_pengerjaan);
-  const qrImageUrl = item.link_qr && item.link_qr.trim() !== ''
-    ? getDirectDriveUrl(item.link_qr)
-    : getQuickChartQrUrl(item.link_pengerjaan, 500);
+  const fallbackQrUrl = getItemQrCodeUrl(item, 500);
+  const qrImageUrl = dataUrl || fallbackQrUrl;
 
   const handleCopyLink = () => {
     if (directPengerjaanUrl === '#') {
@@ -41,14 +57,14 @@ export const QrCodeModal: React.FC<QrCodeModalProps> = ({
       onShowToast('Gambar QR Code tidak tersedia', 'error');
       return;
     }
+    const cleanFileName = item.nama_soal.replace(/[^a-zA-Z0-9_-]/g, '_');
     const a = document.createElement('a');
     a.href = qrImageUrl;
-    a.download = `QR_${item.nama_soal.replace(/\s+/g, '_')}.png`;
-    a.target = '_blank';
+    a.download = `QR_${cleanFileName}.png`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    onShowToast('Memulai pengunduhan QR code...', 'info');
+    onShowToast('Barcode berhasil diunduh', 'success');
   };
 
   return (
@@ -115,6 +131,12 @@ export const QrCodeModal: React.FC<QrCodeModalProps> = ({
               <Smartphone className="w-3.5 h-3.5 text-blue-600" />
               <span>Arahkan kamera smartphone untuk scan</span>
             </div>
+            {directPengerjaanUrl !== '#' && (
+              <div className="mt-1.5 flex items-center justify-center gap-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50/80 px-2 py-0.5 rounded-full border border-emerald-200/60 inline-flex">
+                <Sparkles className="w-3 h-3 text-emerald-600" />
+                <span>Barcode sinkron otomatis dengan link terbaru</span>
+              </div>
+            )}
           </div>
 
           {/* Direct URL preview */}

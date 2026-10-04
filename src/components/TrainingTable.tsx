@@ -2,7 +2,8 @@
 
 import React, { useState, useMemo } from 'react';
 import { TrainingItem, DivisionType } from '../types/training';
-import { formatUrl, getDirectDriveUrl, getQuickChartQrUrl } from '../services/sheetsService';
+import { formatUrl } from '../services/sheetsService';
+import { getItemQrCodeUrl } from '../services/qrService';
 import { SUB_DIVISI_MAP, JENIS_SOAL_OPTIONS } from '../data/initialData';
 import {
   Search,
@@ -409,9 +410,7 @@ export const TrainingTable: React.FC<TrainingTableProps> = ({
               paginatedItems.map(item => {
                 const linkPengerjaan = formatUrl(item.link_pengerjaan);
                 const linkTarikData = formatUrl(item.link_tarik_data);
-                const qrThumb = item.link_qr && item.link_qr.trim() !== ''
-                  ? getDirectDriveUrl(item.link_qr)
-                  : getQuickChartQrUrl(item.link_pengerjaan, 120);
+                const qrThumb = getItemQrCodeUrl(item, 120);
 
                 return (
                   <tr
