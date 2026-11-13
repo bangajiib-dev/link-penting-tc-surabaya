@@ -3,18 +3,20 @@
 import React from 'react';
 import { TrainingItem } from '../types/training';
 import { formatUrl } from '../services/sheetsService';
-import { Eye, ExternalLink, FileSpreadsheet, Calendar, ShieldCheck } from 'lucide-react';
+import { Eye, ExternalLink, FileSpreadsheet, Calendar, ShieldCheck, Edit2, Trash2 } from 'lucide-react';
 
 interface LinkPantauanViewProps {
   data: TrainingItem[];
   onShowQr: (item: TrainingItem) => void;
   onEdit: (item: TrainingItem) => void;
+  onDelete: (item: TrainingItem) => void;
 }
 
 export const LinkPantauanView: React.FC<LinkPantauanViewProps> = ({
   data,
   onShowQr,
-  onEdit
+  onEdit,
+  onDelete
 }) => {
   const pantauanItems = data.filter(
     d => d.divisi === 'Link_Pantauan' || d.jenis_soal === 'Monitoring' || d.nama_soal.toLowerCase().includes('pantauan')
@@ -82,16 +84,34 @@ export const LinkPantauanView: React.FC<LinkPantauanViewProps> = ({
                   Update: {item.updated_date ? item.updated_date.split(' ')[0] : '-'}
                 </span>
 
-                <a
-                  href={directUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-colors shadow-2xs"
-                >
-                  <FileSpreadsheet className="w-3.5 h-3.5" />
-                  <span>Buka Pantauan</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={() => onEdit(item)}
+                    className="p-1.5 text-slate-500 hover:text-blue-700 hover:bg-blue-50 rounded-lg border border-slate-200 transition-colors"
+                    title="Edit Link Pantauan"
+                  >
+                    <Edit2 className="w-3.5 h-3.5" />
+                  </button>
+
+                  <button
+                    onClick={() => onDelete(item)}
+                    className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg border border-slate-200 transition-colors"
+                    title="Hapus Link Pantauan"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+
+                  <a
+                    href={directUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-colors shadow-2xs"
+                  >
+                    <FileSpreadsheet className="w-3.5 h-3.5" />
+                    <span>Buka Pantauan</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
               </div>
             </div>
           );

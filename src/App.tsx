@@ -299,6 +299,7 @@ export default function App() {
               data={data}
               onShowQr={item => setQrModalItem(item)}
               onEdit={item => handleOpenEditModal(item)}
+              onDelete={item => handleOpenDeleteModal(item)}
             />
           ) : (
             <TrainingTable
