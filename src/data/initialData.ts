@@ -3,12 +3,12 @@
 import { TrainingItem } from '../types/training';
 
 export const SUB_DIVISI_MAP: Record<string, string[]> = {
-  TCDEV2: ['Orientasi', 'CSCI', 'Evaluasi CSCI', 'IDEL', 'SC Seasonal', 'Lainnya'],
+  TCDEV2: ['Orientasi', 'CSCI', 'Evaluasi CSCI', 'IDEL', 'SC Seasonal', 'Soft Skill CIF', 'Soft Skill PS', 'Lainnya'],
   SS: ['YCCG', 'Point Coffee', 'Special Store', 'Fried Food', 'Lainnya'],
   FBI: ['Say Bread', 'Say Burger', 'Lainnya'],
   IPL: ['Sertifikasi', 'Eva Sertifikasi', 'Eva Helper', 'Driver', 'Lainnya'],
   Lainnya: ['Lainnya'],
-  Link_Pantauan: ['YCCG', 'Say Bread']
+  Link_Pantauan: ['YCCG', 'Say Bread', 'Soft Skill']
 };
 
 export const JENIS_SOAL_OPTIONS = [
